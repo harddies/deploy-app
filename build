@@ -1,0 +1,8 @@
+FROM golang:1.20.2-alpine AS build
+
+MAINTAINER ronnie
+
+LABEL version="1.0.0"
+
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+RUN go env -w GO111MODULE=on

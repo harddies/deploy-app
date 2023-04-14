@@ -1,0 +1,22 @@
+# 构建go app，生成bin文件和配置文件
+FROM my-go-build:1.20.2 AS build
+
+MAINTAINER ronnie
+
+LABEL version="1.0.0"
+
+ARG project_name
+ARG service_name
+
+WORKDIR /work
+COPY ./kratos-v2-demo/ /work/
+
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+RUN go env -w GO111MODULE=on
+RUN cd /work/${project_name}/cmd/${service_name} && go build -o /work/${project_name}-${service_name} ./...
+RUN cp -r /work/${project_name}/configs /work/
+RUN rm -rf /work/${project_name} && rm -rf /work/.git
+
+# 导出构建到宿主机上
+FROM scratch AS export
+COPY --from=build /work/ .

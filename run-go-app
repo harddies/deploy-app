@@ -1,0 +1,21 @@
+FROM alpine
+
+MAINTAINER ronnie
+
+LABEL version="1.0.0"
+
+ARG project_name
+ARG service_name
+
+ENV DEBIAN_FRONTEND=noninteractive DEBIAN_FRONTEND=teletype TZ=Asia/Shanghai
+ENV PROJECT_NAME=$project_name
+ENV SERVICE_NAME=$service_name
+
+WORKDIR /work
+COPY ./out/$project_name-$service_name /work/
+RUN cd /work/
+
+EXPOSE 8000
+EXPOSE 9000
+
+ENTRYPOINT ["sh", "-c", "./$PROJECT_NAME-$SERVICE_NAME -conf ./configs"]
