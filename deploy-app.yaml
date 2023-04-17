@@ -47,7 +47,7 @@ spec:
       port: 8000
       targetPort: 8000
 ---
-apiVersion: extensions/v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-feature-flag-admin # TODO 变量
