@@ -19,8 +19,9 @@ spec:
         appid: feature-flag-admin # TODO 变量
     spec:
       containers:
-        - image: registry.my-cluster.co:5000/feature-flag-admin # TODO 变量
+        - image: http://registry.my-cluster.co:5000/feature-flag-admin # TODO 变量
           name: feature-flag-admin # TODO 变量
+          imagePullPolicy: IfNotPresent
           env:
             - name: appid
               value: feature-flag-admin # TODO 变量
