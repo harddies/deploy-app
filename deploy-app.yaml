@@ -58,6 +58,7 @@ spec:
   rules:
     - host: api.my-cluster.co # TODO 变量
       http:
+        paths:
         - path: /x/admin/feature-flag # TODO 变量
           pathType: Prefix
           backend:
