@@ -21,7 +21,7 @@ spec:
       imagePullSecrets:
         - name: my-cluster-registry-secret
       containers:
-        - image: registry.my-cluster.co:5000/feature-flag-admin # TODO 变量
+        - image: 192.168.1.128:5000/feature-flag-admin # TODO 变量
           name: feature-flag-admin # TODO 变量
           imagePullPolicy: IfNotPresent
           env:
