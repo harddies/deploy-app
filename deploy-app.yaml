@@ -15,13 +15,14 @@ spec:
     type: Recreate
   template:
     metadata:
+      namespace: app
       labels:
         appid: feature-flag-admin # TODO 变量
     spec:
       imagePullSecrets:
         - name: my-cluster-registry-secret
       containers:
-        - image: 192.168.1.128:5000/feature-flag-admin # TODO 变量
+        - image: registry.my-cluster.co:5000/feature-flag-admin # TODO 变量
           name: feature-flag-admin # TODO 变量
           imagePullPolicy: IfNotPresent
           env:
