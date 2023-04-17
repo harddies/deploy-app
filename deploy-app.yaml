@@ -18,6 +18,8 @@ spec:
       labels:
         appid: feature-flag-admin # TODO 变量
     spec:
+      imagePullSecret:
+        - name: my-cluster-registry-secret
       containers:
         - image: registry.my-cluster.co:5000/feature-flag-admin # TODO 变量
           name: feature-flag-admin # TODO 变量
