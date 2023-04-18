@@ -38,7 +38,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: feature-flag-admin # TODO 变量
+  name: feature-flag-admin-svc # TODO 变量
   namespace: app
   labels:
     appid: feature-flag-admin # TODO 变量
@@ -48,7 +48,7 @@ spec:
     appid: feature-flag-admin # TODO 变量
   ports:
     - protocol: TCP
-      port: 8000
+      port: 80
       targetPort: 8000
 ---
 apiVersion: networking.k8s.io/v1
@@ -64,9 +64,6 @@ spec:
       http:
         paths:
         - path: /x/admin/feature-flag # TODO 变量
-          pathType: Prefix
           backend:
-            service:
-              name: feature-flag-admin # TODO 变量
-              port:
-                number: 8000
+            serviceName: feature-flag-admin-svc
+            servicePort: 80
