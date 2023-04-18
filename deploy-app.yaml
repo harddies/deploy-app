@@ -49,29 +49,9 @@ spec:
   ports:
     - protocol: TCP
       name: http
-      port: 80
+      port: 8000
       targetPort: 8000
     - protocol: TCP
       name: grpc
       port: 9000
       targetPort: 9000
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-feature-flag-admin # TODO 变量
-  namespace: app
-  labels:
-    appid: feature-flag-admin # TODO 变量
-spec:
-  rules:
-    - host: api.my-cluster.co # TODO 变量
-      http:
-        paths:
-        - path: /x/admin/feature-flag # TODO 变量
-          pathType: Prefix
-          backend:
-            service:
-              name: feature-flag-admin-svc # TODO 变量
-              port:
-                number: 80
