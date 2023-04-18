@@ -65,5 +65,7 @@ spec:
         paths:
         - path: /x/admin/feature-flag # TODO 变量
           backend:
-            serviceName: feature-flag-admin-svc
-            servicePort: 80
+            service:
+              name: feature-flag-admin-svc # TODO 变量
+              port:
+                number: 80
