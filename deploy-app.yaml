@@ -55,7 +55,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-feature-flag-admin # TODO 变量
-  namespace: middleware
+  namespace: app
   labels:
     appid: feature-flag-admin # TODO 变量
 spec:
