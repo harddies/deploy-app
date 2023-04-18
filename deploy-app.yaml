@@ -48,9 +48,11 @@ spec:
     appid: feature-flag-admin # TODO 变量
   ports:
     - protocol: TCP
+      name: http
       port: 8000
       targetPort: 8000
     - protocol: TCP
+      name: grpc
       port: 9000
       targetPort: 9000
 ---
