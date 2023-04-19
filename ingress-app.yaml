@@ -6,6 +6,7 @@ metadata:
   labels:
     appid: feature-flag-admin # TODO 变量
 spec:
+  ingressClassName: nginx
   rules:
     - host: api.my-cluster.co # TODO 变量
       http:
