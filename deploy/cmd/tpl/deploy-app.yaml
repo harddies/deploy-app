@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.ProjectName}}-{{.ServiceName}}
+  namespace: app
+  labels:
+    appid: {{.ProjectName}}-{{.ServiceName}}
+spec:
+  replicas: {{.PodCount}}
+  selector:
+    matchLabels:
+      appid: {{.ProjectName}}-{{.ServiceName}}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      namespace: app
+      labels:
+        appid: {{.ProjectName}}-{{.ServiceName}}
+    spec:
+      imagePullSecrets:
+        - name: my-cluster-registry-secret
+      containers:
+        - image: registry.my-cluster.co:5000/{{.ProjectName}}-{{.ServiceName}}
+          name: {{.ProjectName}}-{{.ServiceName}}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: appid
+              value: {{.ProjectName}}-{{.ServiceName}}
+          ports:
+            - containerPort: 8000
+            - containerPort: 9000
+          # volumeMounts:
+          #   - name: XXXX
+          #     mountPath: XXXX
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.ProjectName}}-{{.ServiceName}}-svc
+  namespace: app
+  labels:
+    appid: {{.ProjectName}}-{{.ServiceName}}
+spec:
+  type: ClusterIP
+  selector:
+    appid: {{.ProjectName}}-{{.ServiceName}}
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8000
+      targetPort: 8000
+    - protocol: TCP
+      name: grpc
+      port: 9000
+      targetPort: 9000
