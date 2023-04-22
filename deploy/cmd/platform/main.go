@@ -48,5 +48,9 @@ func getTpl(tplDir string) (t model.Template, err error) {
 	if err != nil {
 		return
 	}
+	t.ServiceApp, err = template.ParseFiles(filepath.Join(tplDir, "service-app.yaml"))
+	if err != nil {
+		return
+	}
 	return
 }

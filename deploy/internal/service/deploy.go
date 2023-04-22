@@ -22,15 +22,14 @@ func (s *Service) ApplyDeployment(d string) {
 		log.Fatal(err)
 	}
 
+	ctx := context.Background()
+
 	buf := bytes.Buffer{}
 	if err = s.template.DeployApp.Execute(&buf, data); err != nil {
 		log.Fatal(err)
 	}
-	b := buf.Bytes()
-
-	ctx := context.Background()
 	dac := new(applyAppsV1.DeploymentApplyConfiguration)
-	if err = yaml.Unmarshal(b, dac); err != nil {
+	if err = yaml.Unmarshal(buf.Bytes(), dac); err != nil {
 		log.Fatalf("yaml.Unmarshal deployment %+v", err)
 	}
 	if _, err = s.k8sClient.AppsV1().Deployments(model.K8sNamespaceApp).
@@ -38,8 +37,12 @@ func (s *Service) ApplyDeployment(d string) {
 		log.Fatalf("k8s apply deployment %+v", err)
 	}
 
+	buf = bytes.Buffer{}
+	if err = s.template.ServiceApp.Execute(&buf, data); err != nil {
+		log.Fatal(err)
+	}
 	svc := new(applyCoreV1.ServiceApplyConfiguration)
-	if err = yaml.Unmarshal(b, svc); err != nil {
+	if err = yaml.Unmarshal(buf.Bytes(), svc); err != nil {
 		log.Fatalf("yaml.Unmarshal svc %+v", err)
 	}
 	if _, err = s.k8sClient.CoreV1().Services(model.K8sNamespaceApp).
