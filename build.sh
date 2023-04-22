@@ -18,7 +18,7 @@ else
   echo -n '服务名称：'
   read service_name
 
-  if [ "$repo" == "1" || "$repo" == "" ]; then
+  if [ "$repo" == "1" ] || [ "$repo" == "" ]; then
     repo="https://github.com/harddies/kratos-v2-demo"
   fi
 
