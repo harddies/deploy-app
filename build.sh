@@ -22,10 +22,6 @@ else
     repo="https://github.com/harddies/kratos-v2-demo"
   fi
 
-  cd /root/deploy-app/kratos-v2-demo
-  git pull
-  git checkout ${branch_name}
-  version=`git log --pretty=oneline -n 1| awk '{print $1}'`
   cd /root/deploy-app
   DOCKER_BUILDKIT=1 docker build --build-arg project_name=${project_name} \
   --build-arg service_name=${service_name} \
@@ -33,8 +29,5 @@ else
   --build-arg branch_name=${branch_name} \
   -t registry.my-cluster.co:5000/build-$project_name-$service_name \
   -f ./build-go-app --output out/$project_name-$service_name .
-
-  touch out/$project_name-$service_name/version
-  echo $version > out/$project_name-$service_name/version
 fi
 echo 'finished building'
