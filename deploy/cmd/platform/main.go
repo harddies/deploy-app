@@ -27,7 +27,7 @@ func main() {
 		kubeConfig = filepath.Join(home, ".kube", "config")
 	}
 	if tplDir == "" {
-		tplDir = "./tpl"
+		tplDir = "../../tpl"
 	}
 	if d == "" {
 		log.Fatalln("data is empty")
@@ -39,7 +39,7 @@ func main() {
 	}
 
 	s := service.New(kubeConfig, t)
-	s.ApplyDeployment(tplDir, d)
+	s.ApplyDeployment(d)
 }
 
 func getTpl(tplDir string) (t model.Template, err error) {

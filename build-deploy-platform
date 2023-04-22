@@ -1,0 +1,19 @@
+# 构建go app，生成bin文件和配置文件
+FROM my-go-build:1.20.2 AS build
+
+MAINTAINER ronnie
+
+LABEL version="1.0.0"
+
+WORKDIR /work
+COPY ./deploy /work/deploy
+
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+RUN go env -w GO111MODULE=on
+RUN cd /work/deploy/cmd/platform && go build -o /work/deploy-platform ./...
+RUN cp -r /work/deploy/cmd/platform/tpl /work/
+RUN rm -rf /work/deploy
+
+# 导出构建到宿主机上
+FROM scratch AS export
+COPY --from=build /work/ .

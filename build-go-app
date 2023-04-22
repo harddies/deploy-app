@@ -5,17 +5,20 @@ MAINTAINER ronnie
 
 LABEL version="1.0.0"
 
+ARG repo
+ARG branch_name
 ARG project_name
 ARG service_name
 
 WORKDIR /work
-COPY ./kratos-v2-demo/ /work/
 
+RUN mkdir -p /work/code
 RUN go env -w GOPROXY=https://goproxy.cn,direct
 RUN go env -w GO111MODULE=on
-RUN cd /work/${project_name}/cmd/${service_name} && go build -o /work/${project_name}-${service_name} ./...
-RUN cp -r /work/${project_name}/configs /work/
-RUN rm -rf /work/${project_name} && rm -rf /work/.git
+RUN git clone ${repo} -b ${branch_name} /work/code
+RUN cd /work/code/${project_name}/cmd/${service_name} && go build -o /work/${project_name}-${service_name} ./...
+RUN cp -r /work/code/${project_name}/configs /work/
+RUN rm -rf /work/code
 
 # 导出构建到宿主机上
 FROM scratch AS export

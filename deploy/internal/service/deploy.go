@@ -13,7 +13,7 @@ import (
 	applyAppsV1 "k8s.io/client-go/applyconfigurations/apps/v1"
 )
 
-func (s *Service) ApplyDeployment(tplDir string, d string) {
+func (s *Service) ApplyDeployment(d string) {
 	var err error
 
 	data := new(model.Data)
