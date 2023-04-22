@@ -6,7 +6,7 @@ echo 'start building'
 echo -n 'deploy? app?'
 read build_type
 
-if [ $build_type eq "deploy" ]; then
+if [ $build_type -eq "deploy" ]; then
   docker build -t deploy-platform -f ./build-deploy-platform --output ./ .
 else
   echo -n '请输入仓库地址编号\n1. https://github.com/harddies/kratos-v2-demo'
@@ -18,7 +18,7 @@ else
   echo -n '服务名称：'
   read service_name
 
-  if [ $repo eq "1" || $repo eq "" ]; then
+  if [ $repo -eq "1" || $repo -eq "" ]; then
     repo="https://github.com/harddies/kratos-v2-demo"
   fi
 
