@@ -9,9 +9,9 @@ docker build -t my-go-build:1.20.2 -f ./build .
 ```
 
 ### 操作步骤 ###
->1. sh ./build.sh
->2. sh ./run.sh
->3. kubectl create -f deploy-app.yaml
+>1. sh ./build.sh。可构建deploy-platform和app
+>2. sh ./run.sh。可构建运行镜像
+>3. kubectl create -f deploy-app.yaml，可通过sh ./deploy.sh动态部署发布
 >4. kubectl create -f ingress-app.yaml
 
 ### 未来 ###
