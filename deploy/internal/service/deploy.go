@@ -32,7 +32,7 @@ func (s *Service) ApplyDeployment(d string) {
 		log.Fatalf("yaml.Unmarshal %+v", err)
 	}
 	if _, err = s.k8sClient.AppsV1().Deployments(model.K8sNamespaceApp).
-		Apply(context.Background(), dac, metaV1.ApplyOptions{FieldManager: "kubectl-apply-controller"}); err != nil {
+		Apply(context.Background(), dac, metaV1.ApplyOptions{FieldManager: model.K8sFieldManager}); err != nil {
 		log.Fatalf("k8s apply %+v", err)
 	}
 	log.Println("apply deployment successfully")
