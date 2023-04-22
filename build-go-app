@@ -16,6 +16,7 @@ RUN mkdir -p /work/code
 RUN go env -w GOPROXY=https://goproxy.cn,direct
 RUN go env -w GO111MODULE=on
 RUN git clone ${repo} -b ${branch_name} /work/code
+RUN touch /work/version && cd /work/code && git log --pretty=oneline -n 1| awk '{print $1}' > /work/version
 RUN cd /work/code/${project_name}/cmd/${service_name} && go build -o /work/${project_name}-${service_name} ./...
 RUN cp -r /work/code/${project_name}/configs /work/
 RUN rm -rf /work/code
