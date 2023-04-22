@@ -45,7 +45,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    appid: {{.ProjectName}}-{{.ServiceName}}
+    "appid": "{{.ProjectName}}-{{.ServiceName}}"
   ports:
     - protocol: TCP
       name: http
