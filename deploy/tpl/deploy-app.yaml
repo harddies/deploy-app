@@ -21,7 +21,7 @@ spec:
       imagePullSecrets:
         - name: my-cluster-registry-secret
       containers:
-        - image: registry.my-cluster.co:5000/{{.ProjectName}}-{{.ServiceName}}:{{.GitVersionTag}}
+        - image: registry.my-cluster.co:5000/{{.ProjectName}}-{{.ServiceName}}:{{.Version}}
           name: {{.ProjectName}}-{{.ServiceName}}
           imagePullPolicy: IfNotPresent
           env:

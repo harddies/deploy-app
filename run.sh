@@ -7,11 +7,14 @@ echo -n '项目名称：'
 read project_name
 echo -n '服务名称：'
 read service_name
-echo -n '版本号：'
+
+ls -lcr out/$project_name-$service_name | awk '{if(NR>1)print $NF,$(NF-3)$(NF-2),$(NF-1)}'
+
+echo -n '版本号：[latest-version]'
 read version
 
 if [ "$version" == "" ]; then
-  version=`ls -lcr /root/deploy-app/out/$project_name-$service_name | awk '{if(NR>1) print $NF}' | head -n 1`
+  version=`ls -lcr out/$project_name-$service_name | awk '{if(NR>1) print $NF}' | head -n 1`
 fi
 
 cd /root/deploy-app
