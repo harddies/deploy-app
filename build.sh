@@ -31,4 +31,7 @@ else
   -t registry.my-cluster.co:5000/build-$project_name-$service_name \
   -f ./build-go-app --output out/$project_name-$service_name .
 fi
+
+docker builder prune -h
+
 echo 'finished building'
