@@ -11,7 +11,7 @@ echo -n '版本号：'
 read version
 
 if [ "$version" == "" ]; then
-  version=`ls -cr /root/deploy-app/out/$project_name-$service_name | head -n 1`
+  version=`ls -lcr /root/deploy-app/out/$project_name-$service_name | awk '{if(NR>1) print $NF}' | head -n 1`
 fi
 
 cd /root/deploy-app
