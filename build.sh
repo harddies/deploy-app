@@ -10,7 +10,7 @@ if [ "$build_type" == "deploy" ]; then
   docker build -t deploy-platform -f ./build-deploy-platform --output ./ .
 else
   echo '1. https://github.com/harddies/kratos-v2-demo'
-  echo -n '请输入仓库地址编号'
+  echo -n '请输入仓库地址编号：'
   read repo
   echo -n '请输入分支名称：'
   read branch_name
