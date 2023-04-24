@@ -20,7 +20,7 @@ fi
 cd /root/deploy-app
 docker build --build-arg project_name=${project_name} \
 --build-arg service_name=${service_name} \
---label version=$version \
+--build-arg version=${version} \
 -t registry.my-cluster.co:5000/$project_name-$service_name \
 -f ./run-go-app .
 
