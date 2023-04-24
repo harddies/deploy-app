@@ -19,4 +19,4 @@ if [ "$version" == "" ]; then
   version=`ls -lcr out/$project_name-$service_name | awk '{if(NR>1) print $NF}' | head -n 1`
 fi
 
-./deploy-platform -tpl_dir=./tpl -data='{"project_name":"'${project_name}'","service_name":"'${service_name}'","git_version_tag":"'${version}'","pod_count":'${pod_count}}
+./deploy-platform -tpl_dir=./tpl -data='{"project_name":"'${project_name}'","service_name":"'${service_name}'","version":"'${version}'","pod_count":'${pod_count}}
