@@ -15,4 +15,4 @@ read version
 echo -n '实例数量：'
 read pod_count
 
-./deploy-platform -tpl_dir=./tpl -data='{"project_name":"'${project_name}'","service_name":"'${service_name}'","version":"'${version}'","pod_count":'${pod_count}}
+./deploy-platform -tpl_dir=./tpl -data='{"project_name":"'${project_name}'","service_name":"'${service_name}'","git_version_tag":"'${version}'","pod_count":'${pod_count}}
