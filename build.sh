@@ -32,6 +32,6 @@ else
   -f ./build-go-app --output out/$project_name-$service_name .
 fi
 
-docker builder prune -h
+docker builder prune -f
 
 echo 'finished building'

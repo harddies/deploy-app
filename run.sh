@@ -27,6 +27,6 @@ docker tag registry.my-cluster.co:5000/$project_name-$service_name registry.my-c
 
 docker push registry.my-cluster.co:5000/$project_name-$service_name:$version
 
-docker builder prune -h
+docker builder prune -f
 
 echo 'finished building'
