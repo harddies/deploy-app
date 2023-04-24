@@ -3,8 +3,6 @@ FROM my-go-build:1.20.2 AS build
 
 MAINTAINER ronnie
 
-LABEL version="1.0.0"
-
 ARG repo
 ARG branch_name
 ARG project_name
@@ -16,9 +14,9 @@ RUN mkdir -p /work/code
 RUN go env -w GOPROXY=https://goproxy.cn,direct
 RUN go env -w GO111MODULE=on
 RUN git clone ${repo} -b ${branch_name} /work/code
-RUN touch /work/version && cd /work/code && git log --pretty=oneline -n 1| awk '{print $1}' > /work/version
-RUN cd /work/code/${project_name}/cmd/${service_name} && go build -o /work/${project_name}-${service_name} ./...
-RUN cp -r /work/code/${project_name}/configs /work/
+RUN cd /work/code && git log --pretty=oneline -n 1| awk '{print $1}' > /work/code/version && mkdir /work/`cat /work/code/version`
+RUN cd /work/code/${project_name}/cmd/${service_name} && go build -o /work/`cat /work/code/version`/${project_name}-${service_name} ./...
+RUN cp -r /work/code/${project_name}/configs /work/`cat /work/code/version`/
 RUN rm -rf /work/code
 
 # 导出构建到宿主机上

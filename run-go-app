@@ -2,8 +2,6 @@ FROM debian
 
 MAINTAINER ronnie
 
-LABEL version="1.0.0"
-
 ARG project_name
 ARG service_name
 
