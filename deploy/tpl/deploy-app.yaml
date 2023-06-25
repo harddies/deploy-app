@@ -11,7 +11,10 @@ spec:
     matchLabels:
       appid: {{.ProjectName}}-{{.ServiceName}}
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       namespace: app
@@ -24,6 +27,10 @@ spec:
         - image: registry.my-cluster.co:5000/{{.ProjectName}}-{{.ServiceName}}:{{.Version}}
           name: {{.ProjectName}}-{{.ServiceName}}
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "200m"
           env:
             - name: appid
               value: {{.ProjectName}}-{{.ServiceName}}
